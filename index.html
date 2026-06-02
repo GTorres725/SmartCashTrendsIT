@@ -10,8 +10,8 @@
     <header>
         <h1>SmartCash</h1>
         <nav>
-            <button onclick=abrirFecharCardAddTransacao()>Adicionar transação</button>
-            <button>Categorias</button> <!-- dentro terá adc limite -->
+            <button onclick="abrirFecharCardsFlut('cardFlutAddTransacao')">Adicionar transação</button>
+            <button onclick="abrirFecharCardsFlut('cardFlutCategorias')">Categorias</button> <!-- dentro terá adc limite -->
             <button>Dashboard detalhado</button>
         </nav>
     </header>
@@ -31,7 +31,7 @@
         </section>
 
         <!-- Card flutuante add op -->
-        <div id="cardFlutAddTransacao" class="oculto">
+        <section id="cardFlutAddTransacao" class="oculto">
             <h3>Adicionar Transação</h3>
 
             <div class="infosTransacao">
@@ -70,12 +70,37 @@
                 <button id="btnSalvarTransacao">
                     Salvar transação
                 </button>
-                <button id="btnSairTransacao" onclick=abrirFecharCardAddTransacao()>
+                <button id="btnSairTransacao" onclick="abrirFecharCardsFlut('cardFlutAddTransacao')">
                     Sair
                 </button>
             </div>
-        </div>
+        </section>
         <!-- Fim card flutuante add op -->
+
+        <!-- Card flutuante categorias -->
+
+        <section id="cardFlutCategorias" class="oculto">
+            <h3>Adicionar categoria</h3>
+
+            <div class="addCategoria">
+                <label for="nomeCategoria">Digite o nome da categoria</label>
+                <br>
+                <input class="nomeCategoria" type="text">
+                <br>
+                <label for="limiteCategoria">Se houver, digite a meta de valor limite da categoria</label>
+                <br>
+                <input class="limiteCategoria" type="number">
+                <br>
+                <button>Salvar</button>
+            </div>
+
+            <div id="categorias">
+
+            </div>
+             <button id="btnSairCategorias" onclick="abrirFecharCardsFlut('cardFlutCategorias')">
+                    Sair
+                </button>
+        </section>
 
         <section class="transacoes">
             <table>

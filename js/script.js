@@ -1,4 +1,4 @@
-const abrirFecharCardAddTransacao = () => {
-    document.getElementById("cardFlutAddTransacao").classList.toggle("oculto");
+const abrirFecharCardsFlut = (element) => {
+    document.getElementById(element).classList.toggle("oculto");
 };
 
