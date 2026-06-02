@@ -20,6 +20,10 @@ a {
     cursor: pointer;
 }
 
+.oculto {
+    display: none !important;
+}
+
 /*  */
 /* Header */
 /*  */
@@ -45,18 +49,14 @@ header nav {
     margin-bottom: 10px;
 }
 
-header nav a {
-    background-color: blueviolet;
-    
-}
 
 /*  */
 /* section periodo */
 /*  */
 
 .periodo {
-    width: 90%;
-    margin: -5% auto 0;
+    width: 325px;
+    margin: -10px auto 10px;
     background-color: blue;
     display: flex;
     flex-wrap: wrap;
@@ -75,6 +75,81 @@ header nav a {
 /* main */
 /*  */
 
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* Adc transação */
+
+#cardFlutAddTransacao {
+    background-color: burlywood;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    height: 80%;
+    position: fixed;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    border-radius: 10px;
+    gap: 30px;
+}
+
+#cardFlutAddTransacao h3 {
+    margin-bottom: 20px;
+}
+
+.infosTransacao {
+   text-align: center;
+   width: 100%;
+}
+
+
+.infosTransacao input, select {
+    width: 60%;
+    height: 80%;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 2px;
+}
+
+#valorDaTransacao {
+    width: 50%;
+}
+
+.addTransacoesBotoes {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+}
+
+.addTransacoesBotoes button {
+    height: 30px;
+    cursor: pointer;
+}
+
+#btnSalvarTransacao {
+    border-radius: 10px;
+    width: 60%;
+    background-color: green;
+}
+
+#btnSairTransacao {
+    border-radius: 10px;
+    width: 30%;
+    background-color: red;
+}
 
 /* section cards */
 
@@ -88,5 +163,5 @@ header nav a {
 .card {
     background-color: black;
     height: 100px;
-    width: 120px;
+    width: 100px;
 }

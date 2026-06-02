@@ -10,10 +10,9 @@
     <header>
         <h1>SmartCash</h1>
         <nav>
-            <a href="">Adicionar transação</a>
-            <a href="">Categorias</a>
-            <!-- dentro terá adc limite -->
-            <a href="">Dashboard detalhado</a>
+            <button onclick=abrirFecharCardAddTransacao()>Adicionar transação</button>
+            <button>Categorias</button> <!-- dentro terá adc limite -->
+            <button>Dashboard detalhado</button>
         </nav>
     </header>
 
@@ -30,6 +29,53 @@
             <div class="card saida"></div>
             <div class="card resultado"></div>
         </section>
+
+        <!-- Card flutuante add op -->
+        <div id="cardFlutAddTransacao" class="oculto">
+            <h3>Adicionar Transação</h3>
+
+            <div class="infosTransacao">
+                <label for="dataTransacao">Data da transação</label>
+                <br>
+                <input class="dataTransacao" type="date">
+            </div>
+            <div class="infosTransacao">
+                <label for="tipoDeOperacao">Tipo da operação</label>
+                <br>
+                <select name="tipoDeOperacao" id="tipoDeOperacao" style="cursor: pointer;">
+                    <option value="" disabled selected>Selecione</option>
+                    <option value="entrada">Entrada</option>
+                    <option value="saida">Saída</option>
+                </select>
+            </div>
+            <div class="infosTransacao">
+                <label for="valorDaTransacao">Valor da transação</label>
+                <br>
+                <label for="valorDaTransacao">R$</label>
+                <input type="number" id="valorDaTransacao" placeholder="00,00">
+            </div>
+            <div class="infosTransacao">
+                <label for="categoria">Categoria</label>
+                <br>
+                <input
+                    type="text"
+                    id="categoria"
+                    list="categorias"
+                    placeholder="Selecione ou digite uma categoria">
+                <datalist id="categorias">
+                    <option value="Alimentação">
+                </datalist>
+            </div>
+            <div class="addTransacoesBotoes">
+                <button id="btnSalvarTransacao">
+                    Salvar transação
+                </button>
+                <button id="btnSairTransacao" onclick=abrirFecharCardAddTransacao()>
+                    Sair
+                </button>
+            </div>
+        </div>
+        <!-- Fim card flutuante add op -->
 
         <section class="transacoes">
             <table>
@@ -54,5 +100,7 @@
     <footer>
 
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
