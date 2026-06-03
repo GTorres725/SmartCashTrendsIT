@@ -8,9 +8,10 @@ let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
 
 //
 // Funcao que cria o obj e adiciona no array transacoes
-const addOperacao = (desc, cat, val, tipOp) => {
+const addOperacao = (data, desc, cat, val, tipOp) => {
     const obj = {
         id: Date.now(),
+        data: data,
         descricao: desc,
         categoria: cat,
         valor: Number(val),
@@ -29,6 +30,7 @@ const addOperacao = (desc, cat, val, tipOp) => {
 // funcao para o onclick do botao salvar do card de add transacao, ele monta o obj, limpa os inputs e renderiza os novos dados na tabela da tela incial
 const btnAddOperacao = () => {
     //pegando os inputs
+    let dataTransacao = document.getElementById("dataTransacao")
     let descTransacao = document.getElementById("descTransacao")
     let categoriaTransacao = document.getElementById("categoriaTransacao")
     let valorTransacao = document.getElementById("valorTransacao")
@@ -36,6 +38,7 @@ const btnAddOperacao = () => {
 
     //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
     addOperacao(
+        dataTransacao.value,
         descTransacao.value,
         categoriaTransacao.value,
         valorTransacao.value,
@@ -86,14 +89,33 @@ const renderizarTransacoes = () => {
     transacoes.forEach(i => {
         tabela.innerHTML += `
             <tr>
+                <td> ${i.data} </td>
                 <td>${i.descricao}</td>
                 <td>${i.categoria}</td>
                 <td>R$ ${i.valor}</td>
                 <td>${i.tipoOperacao}</td>
+                <td>
+                    <button onclick="excluirTransacao(${i.id})"> Excluir <button/>
+                </td>
             </tr>
         `;
     });
 };
+
+//
+// funcao botao excluir
+const excluirTransacao = (id) => {
+    transacoes = transacoes.filter((i) => {
+        return i.id !== id
+    })
+
+    localStorage.setItem(
+        "transacoes",
+        JSON.stringify(transacoes)
+    );
+
+    renderizarTransacoes();
+}
 
 //
 // Categorias
