@@ -10,6 +10,7 @@ let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
 // Funcao que cria o obj e adiciona no array transacoes
 const addOperacao = (desc, cat, val, tipOp) => {
     const obj = {
+        id: Date.now(),
         descricao: desc,
         categoria: cat,
         valor: Number(val),
@@ -106,8 +107,10 @@ let categorias = JSON.parse(localStorage.getItem("categorias")) || [];
 // Funcao que cria o obj e adiciona no array categorias
 const addCategoria = (cat, val) => {
     const obj = {
+        id: Date.now(),
         categoria: cat,
-        valorLimite: Number(val)
+        valorLimite: Number(val),
+        editando: false
     }
 
     categorias.push(obj)
@@ -125,21 +128,28 @@ const btnAddCategoria = () => {
     //pegando os inputs
     let categoria = document.getElementById("nomeCategoria")
     let valorLimite = document.getElementById("limiteCategoria")
-    
-    //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
-    addCategoria(
-        categoria.value,
-        valorLimite.value,
-    )
 
-    console.log(categorias);
-    
+    const existente = categorias.some((i) => {
+       return i.categoria.toLowerCase() == categoria.value.toLowerCase()
+    })
 
-    renderizarCategorias()
+    if (existente) {
+        alert('Categoria existente')
+    }
 
-    //Limpando inputs
-    categoria.value = "";
-    valorLimite.value = "";
+    if (!existente) {
+        //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
+        addCategoria(
+            categoria.value,
+            valorLimite.value,
+        )
+
+        renderizarCategorias()
+
+        //Limpando inputs
+        categoria.value = "";
+        valorLimite.value = "";
+    }
 }
 
 //
@@ -154,11 +164,74 @@ const renderizarCategorias = () => {
             <tr>
                 <td>${i.categoria}</td>
                 <td>R$ ${i.valorLimite}</td>
+                <td>
+                    <button onclick="editarCategoria(${i.id})">
+                        Editar
+                    </button>
+                </td>
+                <td>
+                    <button onclick="excluirCategoria(${i.id})">
+                        Excluir
+                    </button>
+                </td>
             </tr>
         `;
     });
 };
 
+//
+// funcao botao excluir
+const excluirCategoria = (id) => {
+    categorias = categorias.filter((i) => {
+        return i.id !== id
+    })
+
+    localStorage.setItem(
+        "categorias",
+        JSON.stringify(categorias)
+    );
+
+    renderizarCategorias();
+}
+
+// funcao botao editar
+const editarCategoria = (id) => {
+    const categoria = categorias.find(
+        categoria => categoria.id === id
+    );
+
+    const novoNome = prompt(
+        "Novo nome da categoria:",
+        categoria.categoria
+    );
+
+    if (novoNome === null) return;
+
+    const existe = categorias.some(
+        i =>
+            i.id !== id &&
+            i.categoria.toLowerCase() === novoNome.toLowerCase()
+    );
+
+    if (existe) {
+        alert("Já existe uma categoria com esse nome.");
+        return;
+    }
+
+    categoria.categoria = novoNome;
+
+    localStorage.setItem(
+        "categorias",
+        JSON.stringify(categorias)
+    );
+
+    renderizarCategorias();
+};
+
+
+//
+//Renders
+//
 renderizarTransacoes();
 renderizarCategorias();
 attValorTotalTransacoes();
