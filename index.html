@@ -10,7 +10,7 @@
     <header>
         <h1>SmartCash</h1>
         <nav>
-            <button onclick="abrirFecharCardsFlut('cardFlutAddTransacao')">Adicionar transação</button>
+            <button onclick="abrirFecharCardsFlut('cardFlutAddTransacao'); opcoesCategorias()">Adicionar transação</button>
             <button onclick="abrirFecharCardsFlut('cardFlutCategorias')">Categorias</button> <!-- dentro terá adc limite -->
             <button>Dashboard detalhado</button>
         </nav>
@@ -72,7 +72,6 @@
                     list="categorias"
                     placeholder="Selecione ou digite uma categoria">
                 <datalist id="categorias">
-                    <option value="Alimentação">
                 </datalist>
                 <br>
                 <label for="descTransacao">Descrição</label>

@@ -1,3 +1,5 @@
+//
+//Abrir e fechar cards
 const abrirFecharCardsFlut = (element) => {
     document.getElementById(element).classList.toggle("oculto");
 };
@@ -36,27 +38,56 @@ const btnAddOperacao = () => {
     let valorTransacao = document.getElementById("valorTransacao")
     let tipoOperacaoTransacao = document.getElementById("tipoOperacaoTransacao")
 
-    //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
-    addOperacao(
-        dataTransacao.value,
-        descTransacao.value,
-        categoriaTransacao.value,
-        valorTransacao.value,
-        tipoOperacaoTransacao.value
-    )
+    //Verificando se já existe a categoria, caso não, chamo a func q add categoria no arr atráves do add transacao
+    const catExiste = categorias.some((i) => {
+        return i.categoria.toLowerCase() == categoriaTransacao.value.toLowerCase()
+    })
 
-    renderizarTransacoes();
+    if (!catExiste) {
+        addCategoria(categoriaTransacao.value, 0)
+        renderizarCategorias()
+    }
 
-    //Limpando inputs
-    descTransacao.value = "";
-    categoriaTransacao.value = "";
-    valorTransacao.value = "";
-    tipoOperacaoTransacao.value = "";
+    // Verificando se há itens obrigatórios em branco
+    if (dataTransacao.value == '' || categoriaTransacao.value  == '' || tipoOperacaoTransacao.value  == '' || valorTransacao.value == '') {
+        alert("Há dados obrigatórios não preenchidos")
+    } else {
+        //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
+        addOperacao(
+            dataTransacao.value,
+            descTransacao.value,
+            categoriaTransacao.value,
+            valorTransacao.value,
+            tipoOperacaoTransacao.value
+        )
+
+        renderizarTransacoes();
+
+        //Limpando inputs
+        descTransacao.value = "";
+        categoriaTransacao.value = "";
+        valorTransacao.value = "";
+        tipoOperacaoTransacao.value = "";
+        }
+}
+
+//
+// Adc opçoes de categorias já existentes no input do card de adc transacao
+function opcoesCategorias() {
+    const datalist = document.getElementById("categorias");
+
+    datalist.innerHTML = "";
+
+    categorias.forEach(i => {
+        datalist.innerHTML += `
+            <option value="${i.categoria}"></option>
+        `;
+    });
 }
 
 //
 //funcao para o onclick do botao salvar do card de add transacao, ele att cards de valores totais da tela inicial
-const attValorTotalTransacoes = () => {
+function attValorTotalTransacoes() {
     let valorTotalEntradaTransacoes = 0;
     let valorTotalSaidaTransacoes = 0;
 
@@ -81,7 +112,7 @@ const attValorTotalTransacoes = () => {
 };
 
 // Renderizando transacoes na pag principal
-const renderizarTransacoes = () => {
+function renderizarTransacoes() {
     const tabela = document.getElementById("tabelaTransacoes");
 
     tabela.innerHTML = "";
@@ -115,6 +146,8 @@ const excluirTransacao = (id) => {
     );
 
     renderizarTransacoes();
+
+    attValorTotalTransacoes();
 }
 
 //
@@ -127,7 +160,7 @@ let categorias = JSON.parse(localStorage.getItem("categorias")) || [];
 
 //
 // Funcao que cria o obj e adiciona no array categorias
-const addCategoria = (cat, val) => {
+function addCategoria(cat, val) {
     const obj = {
         id: Date.now(),
         categoria: cat,
@@ -155,8 +188,8 @@ const btnAddCategoria = () => {
        return i.categoria.toLowerCase() == categoria.value.toLowerCase()
     })
 
-    if (existente) {
-        alert('Categoria existente')
+    if (existente || categoria.value == '') {
+        alert('Categoria não preenchida ou já existente')
     }
 
     if (!existente) {
@@ -176,7 +209,7 @@ const btnAddCategoria = () => {
 
 //
 // Renderizar no card as categorias
-const renderizarCategorias = () => {
+function renderizarCategorias() {
     const tabela = document.getElementById("tabelaCategorias");
 
     tabela.innerHTML = "";
@@ -248,8 +281,7 @@ const editarCategoria = (id) => {
     );
 
     renderizarCategorias();
-};
-
+}
 
 //
 //Renders
