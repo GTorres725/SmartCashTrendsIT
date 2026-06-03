@@ -83,6 +83,20 @@ main {
     gap: 15px;
 }
 
+/* Cards valores totais */
+
+#valorTotalEntradaTransacoes {
+    color: green;
+}
+
+#valorTotalSaidaTransacoes {
+    color: red;
+}
+
+#valorTotalResultadoTransacoes {
+    color: blue;
+}
+
 /* Adc transação */
 
 #cardFlutAddTransacao {

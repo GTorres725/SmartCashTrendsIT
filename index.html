@@ -25,9 +25,15 @@
 
     <main>
         <section class="cards">
-            <div class="card entrada"></div>
-            <div class="card saida"></div>
-            <div class="card resultado"></div>
+            <div class="card">
+                <p id="valorTotalEntradaTransacoes">R$ 0,00</p>
+            </div>
+            <div class="card saida">
+                <p id="valorTotalSaidaTransacoes">R$ 0,00</p>
+            </div>
+            <div class="card resultado">
+                <p id="valorTotalResultadoTransacoes">R$ 0,00</p>
+            </div>
         </section>
 
         <!-- Card flutuante add op -->
@@ -39,35 +45,43 @@
                 <br>
                 <input class="dataTransacao" type="date">
             </div>
+
             <div class="infosTransacao">
-                <label for="tipoDeOperacao">Tipo da operação</label>
+                <label for="tipoOperacaoTransacao">Tipo da operação</label>
                 <br>
-                <select name="tipoDeOperacao" id="tipoDeOperacao" style="cursor: pointer;">
+                <select name="tipoOperacaoTransacao" id="tipoOperacaoTransacao" style="cursor: pointer;">
                     <option value="" disabled selected>Selecione</option>
                     <option value="entrada">Entrada</option>
                     <option value="saida">Saída</option>
                 </select>
             </div>
+
             <div class="infosTransacao">
-                <label for="valorDaTransacao">Valor da transação</label>
+                <label for="valorTransacao">Valor da transação</label>
                 <br>
-                <label for="valorDaTransacao">R$</label>
-                <input type="number" id="valorDaTransacao" placeholder="00,00">
+                <label for="valorTransacao">R$</label>
+                <input type="number" id="valorTransacao" placeholder="00,00">
             </div>
+
             <div class="infosTransacao">
-                <label for="categoria">Categoria</label>
+                <label for="categoriaTransacao">Categoria</label>
                 <br>
                 <input
                     type="text"
-                    id="categoria"
+                    id="categoriaTransacao"
                     list="categorias"
                     placeholder="Selecione ou digite uma categoria">
                 <datalist id="categorias">
                     <option value="Alimentação">
                 </datalist>
+                <br>
+                <label for="descTransacao">Descrição</label>
+                <br>
+                <input id="descTransacao" type="text">
             </div>
+
             <div class="addTransacoesBotoes">
-                <button id="btnSalvarTransacao">
+                <button id="btnSalvarTransacao" onclick="btnAddOperacao(); attValorTotalTransacoes()">
                     Salvar transação
                 </button>
                 <button id="btnSairTransacao" onclick="abrirFecharCardsFlut('cardFlutAddTransacao')">
@@ -78,7 +92,6 @@
         <!-- Fim card flutuante add op -->
 
         <!-- Card flutuante categorias -->
-
         <section id="cardFlutCategorias" class="oculto">
             <h3>Adicionar categoria</h3>
 
@@ -101,24 +114,24 @@
                     Sair
                 </button>
         </section>
+        <!-- Fim Card flutuante categorias -->
 
+        <!-- Exibindos transacoes -->
         <section class="transacoes">
             <table>
-                <tr>
-                    <th>
-
-                    </th>
-                    <th>
-
-                    </th>
-                    <th>
-
-                    </th>
-                    <th>
-                        
-                    </th>
-                </tr>
-            </table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+            
+                <tbody id="tabelaTransacoes">
+                
+                </tbody>
+                    </table>
         </section>
     </main>
 
