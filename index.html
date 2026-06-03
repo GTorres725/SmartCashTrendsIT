@@ -98,18 +98,30 @@
             <div class="addCategoria">
                 <label for="nomeCategoria">Digite o nome da categoria</label>
                 <br>
-                <input class="nomeCategoria" type="text">
+                <input id="nomeCategoria" type="text">
                 <br>
                 <label for="limiteCategoria">Se houver, digite a meta de valor limite da categoria</label>
                 <br>
-                <input class="limiteCategoria" type="number">
+                <input id="limiteCategoria" type="number">
                 <br>
-                <button>Salvar</button>
+                <button onclick="btnAddCategoria()">Salvar</button>
             </div>
 
-            <div id="categorias">
+            <section id="exibirCategorias">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Categoria</th>
+                            <th>Meta de limite de gasto</th>
+                        </tr>
+                    </thead>
+                
+                    <tbody id="tabelaCategorias">
+                    
+                    </tbody>
+                </table>
+            </section>
 
-            </div>
              <button id="btnSairCategorias" onclick="abrirFecharCardsFlut('cardFlutCategorias')">
                     Sair
                 </button>
@@ -131,7 +143,7 @@
                 <tbody id="tabelaTransacoes">
                 
                 </tbody>
-                    </table>
+            </table>
         </section>
     </main>
 
