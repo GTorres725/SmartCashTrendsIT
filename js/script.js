@@ -48,9 +48,13 @@ const btnAddOperacao = () => {
         renderizarCategorias()
     }
 
+    //Verificando se a data é maior do que o dia atual
+    
     // Verificando se há itens obrigatórios em branco
     if (dataTransacao.value == '' || categoriaTransacao.value  == '' || tipoOperacaoTransacao.value  == '' || valorTransacao.value == '') {
         alert("Há dados obrigatórios não preenchidos")
+    } else if (new Date(dataTransacao.value) > new Date()) {
+        alert("A data da transação não pode ser maior que a data atual")
     } else {
         //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
         addOperacao(
@@ -101,37 +105,67 @@ function attValorTotalTransacoes() {
         }
     });
 
-    document.getElementById("valorTotalEntradaTransacoes").textContent =
-        `R$ ${valorTotalEntradaTransacoes}`;
+    document.getElementById("valorTotalEntradaTransacoes").innerHTML =
+        `R$ <br> ${valorTotalEntradaTransacoes.toFixed(2)}`;
 
-    document.getElementById("valorTotalSaidaTransacoes").textContent =
-       `R$ ${valorTotalSaidaTransacoes}`;
+    document.getElementById("valorTotalSaidaTransacoes").innerHTML =
+       `R$ <br> ${valorTotalSaidaTransacoes.toFixed(2)}`;
 
-    document.getElementById("valorTotalResultadoTransacoes").textContent =
-        `R$ ${valorTotalEntradaTransacoes - valorTotalSaidaTransacoes}`;
+    document.getElementById("valorTotalResultadoTransacoes").innerHTML =
+        `R$ <br> ${(valorTotalEntradaTransacoes - valorTotalSaidaTransacoes).toFixed(2)}`;
 };
 
 // Renderizando transacoes na pag principal
 function renderizarTransacoes() {
     const tabela = document.getElementById("tabelaTransacoes");
 
+    //Periodo levado em consideracao
+    const dataInicio = document.getElementById("dataInicio").value;
+    const dataFim = document.getElementById("dataFim").value;
+
+    let transacoesFilter = [...transacoes];
+
+    if (dataInicio) {
+        transacoesFilter = transacoesFilter.filter(
+            i => i.data >= dataInicio
+        );
+    }
+    if (dataFim) {
+        transacoesFilter = transacoesFilter.filter(
+            i => i.data <= dataFim
+        );
+    }
+
+    //Ordenando em data
+    transacoesFilter.sort((a, b) => {
+        if( new Date(a.data) < new Date(b.data)) return -1
+        if(new Date(a.data) > new Date(b.data)) return 1
+        return 0
+    })
+
     tabela.innerHTML = "";
 
-    transacoes.forEach(i => {
+    transacoesFilter.forEach(i => {
         tabela.innerHTML += `
             <tr>
-                <td> ${i.data} </td>
-                <td>${i.descricao}</td>
-                <td>${i.categoria}</td>
-                <td>R$ ${i.valor}</td>
-                <td>${i.tipoOperacao}</td>
-                <td>
-                    <button onclick="excluirTransacao(${i.id})"> Excluir <button/>
+                <td class="${i.tipoOperacao}"> ${i.data} </td>
+                <td class="${i.tipoOperacao}">${i.descricao}</td>
+                <td class="${i.tipoOperacao}">${i.categoria}</td>
+                <td class="${i.tipoOperacao}">R$ ${i.valor}</td>
+                <td>     
+                    <i class="fa-solid fa-trash" onclick="excluirTransacao(${i.id})" style="cursor: pointer; color: white;"></i>  
                 </td>
             </tr>
         `;
     });
 };
+
+//funcao btn limpar filtros do periodo a ser levado em consideração
+function limparFiltroPeriodo() {
+    document.getElementById("dataInicio").value = ''
+    document.getElementById("dataFim").value = ''
+    renderizarTransacoes()
+}
 
 //
 // funcao botao excluir
@@ -190,10 +224,7 @@ const btnAddCategoria = () => {
 
     if (existente || categoria.value == '') {
         alert('Categoria não preenchida ou já existente')
-    }
-
-    if (!existente) {
-        //chamando a func que adc o obj no arr e passando os elementos necessarioss coletados do input
+    } else {
         addCategoria(
             categoria.value,
             valorLimite.value,
@@ -220,14 +251,10 @@ function renderizarCategorias() {
                 <td>${i.categoria}</td>
                 <td>R$ ${i.valorLimite}</td>
                 <td>
-                    <button onclick="editarCategoria(${i.id})">
-                        Editar
-                    </button>
+                    <i class="fa-regular fa-pen-to-square" onclick="editarCategoria(${i.id})" style="cursor: pointer; color: white;"></i>
                 </td>
-                <td>
-                    <button onclick="excluirCategoria(${i.id})">
-                        Excluir
-                    </button>
+                <td>                      
+                    <i class="fa-solid fa-trash" onclick="excluirCategoria(${i.id})" style="cursor: pointer; color: white;"></i>
                 </td>
             </tr>
         `;
@@ -260,7 +287,15 @@ const editarCategoria = (id) => {
         categoria.categoria
     );
 
-    if (novoNome === null) return;
+    const novoLimite = prompt(
+        "Novo limite da categoria:",
+        categoria.valorLimite
+    );
+
+    if (novoNome === "") {
+        alert("O nome da categoria não pode ficar em branco.");
+        return;
+    }
 
     const existe = categorias.some(
         i =>
@@ -274,6 +309,7 @@ const editarCategoria = (id) => {
     }
 
     categoria.categoria = novoNome;
+    categoria.valorLimite = novoLimite;
 
     localStorage.setItem(
         "categorias",

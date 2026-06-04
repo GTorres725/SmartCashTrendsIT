@@ -1,14 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--raleway);
 }
 
+*:root {
+    --raleway: "Raleway";
+    --black: #000;
+    --grey: #1e1e1e;
+    --white: #fff;
+    --bgColor: #222831;
+    --bgtablecolor: #3e444e;
+    --green: #008000;
+    --red: #831414;
+    --fontGrey: rgba(255,255,255,0.6);
+    --fontNum: "IBM Plex Mono", monospace;
+}
 
 
 body {
     height: 100vh;
     width: 100vw;
+    background-color: var(--bgColor);
 }
 
 /*  */
@@ -24,31 +41,53 @@ a {
     display: none !important;
 }
 
+button {
+    cursor: pointer;
+    color: white;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
 /*  */
 /* Header */
 /*  */
 
 header {
-    background-color: aqua;
+    background-color: var(--black);
     height: 15%;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    border-bottom: 1px solid var(--fontGrey);
 }
 
 header h1 {
     text-align: center;
+    color: var(--white);
+    text-shadow:
+      0 4px 10px rgba(70, 67, 67, 0.5),
+      0 8px 20px var(--fontGrey);
 }
 
 header nav {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 15px;
     text-align: center;
     margin-bottom: 10px;
 }
 
+header button {
+    width: 110px;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    padding: 3px 0;
+}
 
 /*  */
 /* section periodo */
@@ -57,18 +96,42 @@ header nav {
 .periodo {
     width: 325px;
     margin: -10px auto 10px;
-    background-color: blue;
+    background-color: var(--black);
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--fontGrey);
 }
 
 .periodo h3 {
     width: 100%;
     text-align: center;
+    color: var(--white);
+    font-weight: 500;
+}
+
+.periodo p {
+    color: var(--fontGrey);
+    text-align: center;
+}
+
+.periodo input {
+    border-radius: 5px;
+    text-align: center;
+    border: 1px solid black;
+    height: 25px;
+}
+
+.periodo button {
+    width: 100px;
+    padding: 3px 0;
+    border: 1px solid white;
+    background-color: var(--grey);
+    border-radius: 5px;
 }
 
 /*  */
@@ -84,13 +147,39 @@ main {
 }
 
 /* Cards valores totais */
+.cards {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    gap: 10px;
+    width: 100%;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-weight: 600;
+    background-color:var(--black);
+    height: 130px;
+    width: 130px;
+    padding-bottom: 10px;
+    border: 1px solid var(--fontGrey);
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.card p {
+    font-family: var(--fontNum);
+}
 
 #valorTotalEntradaTransacoes {
-    color: green;
+    color: var(--green);
 }
 
 #valorTotalSaidaTransacoes {
-    color: red;
+    color: var(--red);
 }
 
 #valorTotalResultadoTransacoes {
@@ -98,14 +187,14 @@ main {
 }
 
 /* Adc transação */
-
 #cardFlutAddTransacao {
-    background-color: burlywood;
+    background-color: var(--black);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     width: 80%;
+    max-width: 600px;
     height: 80%;
     position: fixed;
     top: 47%;
@@ -113,7 +202,10 @@ main {
     transform: translate(-50%, -50%);
     z-index: 1;
     border-radius: 10px;
-    gap: 30px;
+    gap: 20px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    padding: 20px 0;
 }
 
 #cardFlutAddTransacao h3 {
@@ -125,81 +217,187 @@ main {
    width: 100%;
 }
 
-
-.infosTransacao input, select {
+.infosTransacao input, select, datalist {
     width: 60%;
-    height: 80%;
+    height: 30px;
     text-align: center;
     border-radius: 10px;
     border: 1px solid black;
     margin-top: 2px;
-}
-
-#valorDaTransacao {
-    width: 50%;
+    margin-top: 8px;
 }
 
 .addTransacoesBotoes {
-    margin-top: 40px;
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
+    gap: 30px;
     width: 100%;
 }
 
 .addTransacoesBotoes button {
     height: 30px;
-    cursor: pointer;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    padding: 3px 0;
+}
+
+#btnSalvarTransacao:hover {
+    background-color: var(--green);
 }
 
 #btnSalvarTransacao {
-    border-radius: 10px;
-    width: 60%;
-    background-color: green;
+    width: 140px;
+}
+
+#btnSairTransacao:hover {
+    background-color: var(--red);
 }
 
 #btnSairTransacao {
-    border-radius: 10px;
-    width: 30%;
-    background-color: red;
+    width: 100px;
+}
+
+/* tabela */
+
+.transacoes {
+    width: 95%;
+    margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.transacoes thead {
+    color: var(--white);
+}
+
+.transacoes table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background-color: var(--black);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: var(--fontNum);
+}
+
+
+.transacoes th,
+.transacoes td {
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.transacoes tr {
+    border-bottom: 3px solid var(--bgColor);
+}
+
+.transacoes tbody tr:hover {
+    background-color: var(--bgColor);
+}
+
+.entrada {
+    color: var(--green);
+}
+
+.saida {
+    color: var(--red);
 }
 
 /* flutuante Categorias */
 
 #cardFlutCategorias {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: beige;
+    background-color: var(--black);
     width: 80%;
+    max-width: 600px;
     height: 80%;
-    padding: 30px 0;
     position: fixed;
     top: 47%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
     border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    padding-top: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .addCategoria {
     text-align: center;
     width: 100%;
-    margin-top: 20px;
-}
-
-/* section cards */
-
-.cards {
-    background-color: brown;
+    margin-top: 40px;
     display: flex;
-    padding: 15px;
-    gap: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
-.card {
-    background-color: black;
-    height: 100px;
+.addCategoria div {
+    width: 100%;
+}
+
+.addCategoria input {
+    width: 60%;
+    height: 30px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid black;
+    margin-top: 8px;
+}
+
+#exibirCategorias {
+    background-color: var(--black);
+    width: 95%;
+    margin: 5px 0;
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+#exibirCategorias thead {
+    color: var(--white);
+}
+
+#exibirCategorias table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background-color: var(--grey);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: var(--fontNum);
+}
+
+
+#exibirCategorias th,
+#exibirCategorias td {
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+#exibirCategorias tr {
+    border-bottom: 3px solid var(--black);
+}
+
+#exibirCategorias tbody tr:hover {
+    background-color: var(--bgColor);
+}
+
+#cardFlutCategorias button {
+    height: 30px;
+    background-color: rgba(255,255,255,0.1);
+    border: none;
+    padding: 3px 0;
     width: 100px;
 }

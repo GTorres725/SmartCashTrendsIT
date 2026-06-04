@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
     <title>Smartcash</title>
 </head>
@@ -11,28 +12,30 @@
         <h1>SmartCash</h1>
         <nav>
             <button onclick="abrirFecharCardsFlut('cardFlutAddTransacao'); opcoesCategorias()">Adicionar transação</button>
-            <button onclick="abrirFecharCardsFlut('cardFlutCategorias')">Categorias</button> <!-- dentro terá adc limite -->
-            <button>Dashboard detalhado</button>
+            <button onclick="abrirFecharCardsFlut('cardFlutCategorias')">Gerenciar Categorias</button> <!-- dentro terá adc limite -->
+            <button>Dashboard Detalhado</button>
         </nav>
     </header>
 
     <section class="periodo">
         <h3>Período levado em consideração</h3>
-        <input type="date">
+        <input id="dataInicio" type="date">
         <p>até</p>
-        <input type="date">
+        <input id="dataFim" type="date">
+        <button onclick="renderizarTransacoes()">Filtrar</button>
+        <button onclick="limparFiltroPeriodo()">Limpar filtro</button>
     </section>
 
     <main>
         <section class="cards">
             <div class="card">
-                <p id="valorTotalEntradaTransacoes">R$ 0,00</p>
+                <p id="valorTotalEntradaTransacoes"></p>
             </div>
-            <div class="card saida">
-                <p id="valorTotalSaidaTransacoes">R$ 0,00</p>
+            <div class="card">
+                <p id="valorTotalSaidaTransacoes"></p>
             </div>
-            <div class="card resultado">
-                <p id="valorTotalResultadoTransacoes">R$ 0,00</p>
+            <div class="card">
+                <p id="valorTotalResultadoTransacoes"></p>
             </div>
         </section>
 
@@ -59,8 +62,7 @@
             <div class="infosTransacao">
                 <label for="valorTransacao">Valor da transação</label>
                 <br>
-                <label for="valorTransacao">R$</label>
-                <input type="number" id="valorTransacao" placeholder="00,00">
+                <input type="number" id="valorTransacao" placeholder="R$ 00.00">
             </div>
 
             <div class="infosTransacao">
@@ -71,9 +73,10 @@
                     id="categoriaTransacao"
                     list="categorias"
                     placeholder="Selecione ou digite uma categoria">
-                <datalist id="categorias">
-                </datalist>
-                <br>
+                    <datalist id="categorias">
+                    </datalist>
+            </div>
+            <div class="infosTransacao">
                 <label for="descTransacao">Descrição</label>
                 <br>
                 <input id="descTransacao" type="text">
@@ -95,14 +98,18 @@
             <h3>Adicionar categoria</h3>
 
             <div class="addCategoria">
-                <label for="nomeCategoria">Digite o nome da categoria</label>
-                <br>
-                <input id="nomeCategoria" type="text">
-                <br>
-                <label for="limiteCategoria">Se houver, digite a meta de valor limite da categoria</label>
-                <br>
-                <input id="limiteCategoria" type="number">
-                <br>
+                <div>
+                    <label for="nomeCategoria">Digite o nome da categoria</label>
+                    <br>
+                    <input id="nomeCategoria" type="text">
+                </div>
+                
+                <div>
+                    <label for="limiteCategoria">Se houver, digite a meta de valor limite da categoria</label>
+                    <br>
+                    <input id="limiteCategoria" type="number">
+                    <br>
+                </div>
                 <button onclick="btnAddCategoria()">Salvar</button>
             </div>
 
@@ -132,10 +139,10 @@
             <table>
                 <thead>
                     <tr>
+                        <th>Data</th>
                         <th>Descrição</th>
                         <th>Categoria</th>
                         <th>Valor</th>
-                        <th>Tipo</th>
                     </tr>
                 </thead>
             
