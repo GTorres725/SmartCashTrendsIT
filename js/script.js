@@ -322,6 +322,141 @@ const editarCategoria = (id) => {
 //
 //Renders
 //
-renderizarTransacoes();
-renderizarCategorias();
+if (document.getElementById("tabelaTransacoes")) {
+    renderizarTransacoes();
+}
+
+if (document.getElementById("tabelaCategorias")) {
+    renderizarCategorias();
+}
+
 attValorTotalTransacoes();
+
+//
+// DAsh
+//
+
+function ordenarDash(id) {
+    btn = document.getElementById(id)
+    if (btn.value == 'crescente') {
+        btn.value = 'decrescente';
+    } else {
+        btn.value = 'crescente'
+    }
+}
+
+function dashValores(tip, id, inpt, idOrd) {
+    const tabela = document.getElementById(id);
+    const input = document.getElementById(inpt);
+
+    let categoriasValores = {}
+
+    if (input.value != '' && transacoes.some(i => i.categoria == input.value)) {
+        categoriasValores[input.value] = 0
+        transacoes.forEach((i) => {
+            if (i.tipoOperacao != tip) return;
+
+            if (i.categoria == input.value) {
+                categoriasValores[input.value] += i.valor;    
+            }
+        })
+
+
+    } else if (input.value != '' && !transacoes.some(i => i.categoria == input.value)) {
+        alert ("Insira uma categoria existente");
+        input.value = ''
+        return;
+
+    } else {
+        transacoes.forEach((i) => {
+            if (i.tipoOperacao != tip) return;
+
+            if (!categoriasValores[i.categoria]) {
+                categoriasValores[i.categoria] = 0;
+            }
+
+        categoriasValores[i.categoria] += i.valor;        
+        })
+    }
+
+    tabela.innerHTML = ''
+
+    Object.entries(categoriasValores)
+        .sort((a, b) => {
+            if(document.getElementById(idOrd).value == 'crescente') {
+                if(a[1] > b[1]) return -1;
+                if(a[1] < b[1]) return 1;
+                return 0
+            } else {
+                if(a[1] < b[1]) return -1;
+                if(a[1] > b[1]) return 1;
+                return 0
+            }
+        })
+        .slice(0, 5)
+        .forEach(([cat, val]) => {
+            tabela.innerHTML += `
+                <tr>
+                    <td>${cat}</td>
+                    <td>R$${val}</td>
+                </tr>
+            `;
+        });
+};
+
+//qtd
+
+function dashQtd(tip, id, inpt, idOrd) {
+    const tabela = document.getElementById(id)
+    const input = document.getElementById(inpt);
+
+    let categoriasValores = {}
+
+    if (input.value != '') {
+        categoriasValores[input.value] = transacoes.filter(t => t.tipoOperacao == tip && t.categoria == input.value).length;
+
+        input.value = '';
+
+    } else {
+        transacoes.forEach((i) => {
+            if (i.tipoOperacao !== tip) return;
+
+            if (!categoriasValores[i.categoria]) {
+                categoriasValores[i.categoria] = transacoes.filter(t => t.tipoOperacao == tip && t.categoria == i.categoria).length;
+            }
+        });
+    }
+
+    tabela.innerHTML = ''
+
+    Object.entries(categoriasValores)
+        .sort((a, b) => {
+            if(document.getElementById(idOrd).value == 'crescente') {
+                if(a[1] > b[1]) return -1;
+                if(a[1] < b[1]) return 1;
+                return 0
+            } else {
+                if(a[1] < b[1]) return -1;
+                if(a[1] > b[1]) return 1;
+                return 0
+            }
+        })
+        .slice(0, 5)
+        .forEach(([cat, val]) => {
+            tabela.innerHTML += `
+                <tr>
+                    <td>${cat}</td>
+                    <td>${val}</td>
+                </tr>
+            `;
+        });
+}
+
+
+
+dashValores("saida", "tabelaValoresSaida", "dashSaidaInputCat", "ordenarDashSaidas");
+dashValores("entrada", "tabelaValoresEntrada", "dashEntradaInputCat", "ordenarDashEntradas");
+
+dashQtd("saida", "tabelaQtdSaida", "dashSaidaInputCat", "ordenarDashSaidas")
+dashQtd("entrada", "tabelaQtdEntrada", "dashEntradaInputCat", "ordenarDashEntradas")
+

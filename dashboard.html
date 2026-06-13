@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css">
+    <title>Smartcash - Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>SmartCash</h1>
+        <nav>
+            <button><a href="index.html">Menu</a></button>
+        </nav>
+    </header>
+
+    <section class="periodo">
+        <h3>Período levado em consideração</h3>
+        <input id="dataInicio" type="date">
+        <p>até</p>
+        <input id="dataFim" type="date">
+        <button onclick="renderizarTransacoes()">Filtrar</button>
+        <button onclick="limparFiltroPeriodo()">Limpar filtro</button>
+    </section>
+
+    <main>
+        <section class="cards">
+            <div class="card">
+                <p id="valorTotalEntradaTransacoes"></p>
+            </div>
+            <div class="card">
+                <p id="valorTotalSaidaTransacoes"></p>
+            </div>
+            <div class="card">
+                <p id="valorTotalResultadoTransacoes"></p>
+            </div>
+        </section>
+
+        <section id="tabeladash">
+            <h1>Saídas</h1>
+                <div>
+                    <h4>Buscar por categoria</h4>
+                    <input type="text" id="dashSaidaInputCat" placeholder="digite a categoria">
+                    <button onclick="dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat'), dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat')">A</button>
+                </div>
+
+                <button
+                    id="ordenarDashSaidas"
+                    value="crescente"
+                    onclick="ordenarDash('ordenarDashSaidas')
+                        dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')
+                        dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')">
+                    Ordenar
+                </button>
+
+                <table>
+                    <caption>Valores</caption>
+                    <thead>
+                        <tr>
+                            <th style="width: 70%;">Categoria</th>
+                            <th style="width: 30%;">Valor</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaValoresSaida">
+
+                    </tbody>
+                </table>
+
+                <table>
+                    <caption>Quantidade</caption>
+                    <thead>
+                        <tr>
+                            <th style="width: 70%;">Categoria</th>
+                            <th style="width: 30%;">Quantidade</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaQtdSaida">
+
+                    </tbody>
+                </table>
+        </section>
+
+        <section id="tabeladash">
+            <h1>Entradas</h1>
+
+                <div>
+                    <h4>Buscar por categoria</h4>
+                    <input type="text" id="dashEntradaInputCat" placeholder="digite a categoria">
+                    <button onclick="dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat'), dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat')">A</button>
+                </div>
+
+                <button
+                    id="ordenarDashEntradas"
+                    value="crescente"
+                    onclick="ordenarDash('ordenarDashEntradas')
+                        dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')
+                        dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')">
+                    Ordenar
+                </button>
+
+                <table>
+                    <caption>Valores</caption>
+                    <thead>
+                        <tr>
+                            <th style="width: 70%;">Categoria</th>
+                            <th style="width: 30%;">Valor</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaValoresEntrada">
+
+                    </tbody>
+                </table>
+
+                <table>
+                    <caption>Quantidade</caption>
+                    <thead>
+                        <tr>
+                            <th style="width: 70%;">Categoria</th>
+                            <th style="width: 30%;">Quantidade</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabelaQtdEntrada">
+
+                    </tbody>
+                </table>
+        </section>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script src="js/script.js">
+    </script>
+</body>
+
+</html>
+
+

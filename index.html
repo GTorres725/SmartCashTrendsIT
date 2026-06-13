@@ -12,8 +12,8 @@
         <h1>SmartCash</h1>
         <nav>
             <button onclick="abrirFecharCardsFlut('cardFlutAddTransacao'); opcoesCategorias()">Adicionar transação</button>
-            <button onclick="abrirFecharCardsFlut('cardFlutCategorias')">Gerenciar Categorias</button> <!-- dentro terá adc limite -->
-            <button>Dashboard Detalhado</button>
+            <button onclick="abrirFecharCardsFlut('cardFlutCategorias')">Gerenciar Categorias</button>
+            <button><a href="dashboard.html">Dashboard Detalhado</a></button>
         </nav>
     </header>
 
@@ -110,7 +110,7 @@
                     <input id="limiteCategoria" type="number">
                     <br>
                 </div>
-                <button onclick="btnAddCategoria()">Salvar</button>
+                <button class="btnAddCategoria" onclick="btnAddCategoria()">Salvar</button>
             </div>
 
             <section id="exibirCategorias">
@@ -128,9 +128,9 @@
                 </table>
             </section>
 
-             <button id="btnSairCategorias" onclick="abrirFecharCardsFlut('cardFlutCategorias')">
-                    Sair
-                </button>
+            <button id="btnSairCategorias" onclick="abrirFecharCardsFlut('cardFlutCategorias')">
+                Sair
+            </button>
         </section>
         <!-- Fim Card flutuante categorias -->
 

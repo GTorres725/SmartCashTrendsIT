@@ -401,3 +401,60 @@ main {
     padding: 3px 0;
     width: 100px;
 }
+
+
+
+/*  */
+/* Dash */
+/*  */
+
+#tabeladash {
+    width: 95%;
+    margin: 5px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-weight: bold;
+    text-align: center;
+    gap: 20px;
+}
+
+#tabeladash thead {
+    color: var(--white);
+}
+
+#tabeladash table {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background-color: var(--black);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    font-family: var(--fontNum);
+    text-align: center;
+}
+
+
+#tabeladash th,
+#tabeladash td {
+    padding: 8px;
+    font-size: 14px;
+    text-align: center;
+    border-right: 1px solid green;
+}
+
+#tabeladash tr {
+    border-bottom: 3px solid var(--bgColor);
+}
+
+#tabeladash tbody tr:hover {
+    background-color: var(--bgColor);
+}
+
+#tabelaValoresEntrada, #tabelaQtdEntrada {
+    color: var(--green);
+}
+
+#tabelaValoresSaida, #tabelaQtdSaida {
+    color: var(--red);
+}
