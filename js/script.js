@@ -4,6 +4,14 @@ const abrirFecharCardsFlut = (element) => {
     document.getElementById(element).classList.toggle("oculto");
 };
 
+// Padroniza txt
+function normalizarTexto(texto) {
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+}
+
 //
 // arr q armazena as transacoes
 let transacoes = JSON.parse(localStorage.getItem("transacoes")) || [];
@@ -15,7 +23,7 @@ const addOperacao = (data, desc, cat, val, tipOp) => {
         id: Date.now(),
         data: data,
         descricao: desc,
-        categoria: cat,
+        categoria: normalizarTexto(cat),
         valor: Number(val),
         tipoOperacao: tipOp
     }
@@ -40,7 +48,7 @@ const btnAddOperacao = () => {
 
     //Verificando se já existe a categoria, caso não, chamo a func q add categoria no arr atráves do add transacao
     const catExiste = categorias.some((i) => {
-        return i.categoria.toLowerCase() == categoriaTransacao.value.toLowerCase()
+        return normalizarTexto(i.categoria) == normalizarTexto(categoriaTransacao.value)
     })
 
     if (!catExiste) {
@@ -197,7 +205,7 @@ let categorias = JSON.parse(localStorage.getItem("categorias")) || [];
 function addCategoria(cat, val) {
     const obj = {
         id: Date.now(),
-        categoria: cat,
+        categoria: normalizarTexto(cat),
         valorLimite: Number(val),
         editando: false
     }
@@ -543,7 +551,7 @@ function dashTblLimit() {
         const categoria = categoriasDashLimit.find(t => t.categoria == i.categoria);
 
         if (categoria.categoria)
-        if (categoria.valorLimite <= 0) return;
+        if (categoria.valorLimite <= 0) return
 
         if (!obj[i.categoria]) {
             obj[i.categoria] = {
