@@ -308,16 +308,30 @@ const editarCategoria = (id) => {
         return;
     }
 
+    const nomeAntigo = categoria.categoria;
+
     categoria.categoria = novoNome;
-    categoria.valorLimite = novoLimite;
+    categoria.valorLimite = Number(novoLimite);
+
+    transacoes.forEach(i => {
+        if (i.categoria === nomeAntigo) {
+            i.categoria = novoNome;
+        }
+    });
 
     localStorage.setItem(
         "categorias",
         JSON.stringify(categorias)
     );
 
+    localStorage.setItem(
+        "transacoes",
+        JSON.stringify(transacoes)
+    );
+
     renderizarCategorias();
-}
+    renderizarTransacoes();
+};
 
 //
 //Renders
