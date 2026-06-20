@@ -35,6 +35,7 @@ body {
 a {
     text-decoration: none;
     cursor: pointer;
+    color: var(--white);
 }
 
 .oculto {
@@ -43,7 +44,7 @@ a {
 
 button {
     cursor: pointer;
-    color: white;
+    color: var(--white);
     transition: 0.2s ease;
 }
 
@@ -144,6 +145,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 15px;
+    max-width: 100%;
 }
 
 /* Cards valores totais */
@@ -280,7 +282,6 @@ main {
     background-color: var(--black);
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    font-family: var(--fontNum);
 }
 
 
@@ -375,7 +376,6 @@ main {
     background-color: var(--grey);
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    font-family: var(--fontNum);
 }
 
 
@@ -409,14 +409,62 @@ main {
 /*  */
 
 #tabeladash {
-    width: 95%;
+    width: 90%;
+    max-width: 1000px;
     margin: 5px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     font-weight: bold;
     text-align: center;
-    gap: 20px;
+    gap: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 10px;
+    padding-bottom: 20px;
+}
+
+.inptbtn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid black;
+    padding-bottom: 10px;
+}
+
+#tabeladash input::placeholder {
+    text-align: center;
+}
+
+#tabeladash input {
+    height: 25px;
+    width: 200px;
+    border-radius: 5px;
+    border: none;
+}
+
+.fa-arrow-right{
+    width: 25px;
+    height: 25px;
+    border: 1px solid var(--white);
+    background-color: var(--grey);
+    border-radius: 5px;
+    padding: 3px 0;
+}
+
+.inptbtn h4 {
+    font-weight: 400;
+}
+
+.btnOrd {
+    width: 100px;
+    border: 1px solid var(--white);
+    background-color: var(--grey);
+    border-radius: 5px;
+    padding: 3px 0;
 }
 
 #tabeladash thead {
@@ -425,22 +473,20 @@ main {
 
 #tabeladash table {
     width: 100%;
-    max-width: 1000px;
+    max-width: 800px;
     border-collapse: collapse;
     background-color: var(--black);
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    font-family: var(--fontNum);
     text-align: center;
 }
-
 
 #tabeladash th,
 #tabeladash td {
     padding: 8px;
     font-size: 14px;
     text-align: center;
-    border-right: 1px solid green;
+    border-right: 1px solid var(--bgColor);
 }
 
 #tabeladash tr {
@@ -457,4 +503,30 @@ main {
 
 #tabelaValoresSaida, #tabelaQtdSaida {
     color: var(--red);
+}
+
+#tabelaLimite {
+    color: var(--white);
+}
+
+/* Cores porc */
+
+.verde {
+    color: var(--green);
+    font-weight: bold;
+}
+
+.amarelo {
+    color: #f1c40f;
+    font-weight: bold;
+}
+
+.laranja {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.vermelho {
+    color: var(--red);
+    font-weight: bold;
 }

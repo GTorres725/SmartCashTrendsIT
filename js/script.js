@@ -151,7 +151,7 @@ function renderizarTransacoes() {
                 <td class="${i.tipoOperacao}"> ${i.data} </td>
                 <td class="${i.tipoOperacao}">${i.descricao}</td>
                 <td class="${i.tipoOperacao}">${i.categoria}</td>
-                <td class="${i.tipoOperacao}">R$ ${i.valor}</td>
+                <td class="${i.tipoOperacao}">R$ ${i.valor.toFixed(2)}</td>
                 <td>     
                     <i class="fa-solid fa-trash" onclick="excluirTransacao(${i.id})" style="cursor: pointer; color: white;"></i>  
                 </td>
@@ -349,11 +349,29 @@ function dashValores(tip, id, inpt, idOrd) {
     const tabela = document.getElementById(id);
     const input = document.getElementById(inpt);
 
+    //Periodo levado em consideracao
+    const dataInicio = document.getElementById("dataInicio").value;
+    const dataFim = document.getElementById("dataFim").value;
+
+    let transacoesFilter = [...transacoes];
+
+    if (dataInicio) {
+        transacoesFilter = transacoesFilter.filter(
+            i => i.data >= dataInicio
+        );
+    }
+    if (dataFim) {
+        transacoesFilter = transacoesFilter.filter(
+            i => i.data <= dataFim
+        );
+    }
+    //
+
     let categoriasValores = {}
 
-    if (input.value != '' && transacoes.some(i => i.categoria == input.value)) {
+    if (input.value != '' && transacoesFilter.some(i => i.categoria == input.value)) {
         categoriasValores[input.value] = 0
-        transacoes.forEach((i) => {
+        transacoesFilter.forEach((i) => {
             if (i.tipoOperacao != tip) return;
 
             if (i.categoria == input.value) {
@@ -362,13 +380,13 @@ function dashValores(tip, id, inpt, idOrd) {
         })
 
 
-    } else if (input.value != '' && !transacoes.some(i => i.categoria == input.value)) {
+    } else if (input.value != '' && !transacoesFilter.some(i => i.categoria == input.value)) {
         alert ("Insira uma categoria existente");
         input.value = ''
         return;
 
     } else {
-        transacoes.forEach((i) => {
+        transacoesFilter.forEach((i) => {
             if (i.tipoOperacao != tip) return;
 
             if (!categoriasValores[i.categoria]) {
@@ -398,7 +416,7 @@ function dashValores(tip, id, inpt, idOrd) {
             tabela.innerHTML += `
                 <tr>
                     <td>${cat}</td>
-                    <td>R$${val}</td>
+                    <td>R$${val.toFixed(2)}</td>
                 </tr>
             `;
         });
@@ -410,19 +428,37 @@ function dashQtd(tip, id, inpt, idOrd) {
     const tabela = document.getElementById(id)
     const input = document.getElementById(inpt);
 
+    //Periodo levado em consideracao
+    const dataInicio = document.getElementById("dataInicio").value;
+    const dataFim = document.getElementById("dataFim").value;
+
+    let transacoesFilter = [...transacoes];
+
+    if (dataInicio) {
+        transacoesFilter = transacoesFilter.filter(
+            i => i.data >= dataInicio
+        );
+    }
+    if (dataFim) {
+        transacoesFilter = transacoesFilter.filter(
+            i => i.data <= dataFim
+        );
+    }
+    //
+
     let categoriasValores = {}
 
     if (input.value != '') {
-        categoriasValores[input.value] = transacoes.filter(t => t.tipoOperacao == tip && t.categoria == input.value).length;
+        categoriasValores[input.value] = transacoesFilter.filter(t => t.tipoOperacao == tip && t.categoria == input.value).length;
 
         input.value = '';
 
     } else {
-        transacoes.forEach((i) => {
+        transacoesFilter.forEach((i) => {
             if (i.tipoOperacao !== tip) return;
 
             if (!categoriasValores[i.categoria]) {
-                categoriasValores[i.categoria] = transacoes.filter(t => t.tipoOperacao == tip && t.categoria == i.categoria).length;
+                categoriasValores[i.categoria] = transacoesFilter.filter(t => t.tipoOperacao == tip && t.categoria == i.categoria).length;
             }
         });
     }
@@ -453,6 +489,14 @@ function dashQtd(tip, id, inpt, idOrd) {
 }
 
 
+function limparFiltroPeriodoDash() {
+    document.getElementById("dataInicio").value = ''
+    document.getElementById("dataFim").value = ''
+    dashValores("saida", "tabelaValoresSaida", "dashSaidaInputCat", "ordenarDashSaidas");
+    dashValores("entrada", "tabelaValoresEntrada", "dashEntradaInputCat", "ordenarDashEntradas");
+    dashQtd("saida", "tabelaQtdSaida", "dashSaidaInputCat", "ordenarDashSaidas")
+    dashQtd("entrada", "tabelaQtdEntrada", "dashEntradaInputCat", "ordenarDashEntradas")
+}
 
 dashValores("saida", "tabelaValoresSaida", "dashSaidaInputCat", "ordenarDashSaidas");
 dashValores("entrada", "tabelaValoresEntrada", "dashEntradaInputCat", "ordenarDashEntradas");
@@ -460,3 +504,76 @@ dashValores("entrada", "tabelaValoresEntrada", "dashEntradaInputCat", "ordenarDa
 dashQtd("saida", "tabelaQtdSaida", "dashSaidaInputCat", "ordenarDashSaidas")
 dashQtd("entrada", "tabelaQtdEntrada", "dashEntradaInputCat", "ordenarDashEntradas")
 
+
+// 
+//tabela limite
+
+function dashTblLimit() {
+    const tabela = document.getElementById('tabelaLimite')
+    const periodo = document.getElementById('periodoTabelaLimite');
+
+    //periodo
+    let transacoesFilter = [...transacoes];
+    let categoriasDashLimit = [...categorias];
+
+    if (periodo.value == '') {
+        alert('Insira um período válido');
+        return
+    }
+    transacoesFilter = transacoesFilter.filter(i => i.data.startsWith(periodo.value) && i.tipoOperacao == 'saida');
+
+
+    //montando
+    let obj = {}
+    transacoesFilter.forEach(i => {
+        const categoria = categoriasDashLimit.find(t => t.categoria == i.categoria);
+
+        if (categoria.categoria)
+        if (categoria.valorLimite <= 0) return;
+
+        if (!obj[i.categoria]) {
+            obj[i.categoria] = {
+                valor: 0,
+                limite: +categoria.valorLimite,
+                porc: 0
+            };
+        }
+
+        obj[i.categoria].valor += i.valor;
+    });
+
+    Object.values(obj).forEach(i => {
+        i.porc = ((i.valor / i.limite) * 100).toFixed(0)
+    })
+
+    //tabela
+    tabela.innerHTML = ''
+
+
+    Object.entries(obj)
+        .sort((a, b) => b[1].porc - a[1].porc)
+        .forEach(([cat, dados]) => {
+
+            let classePorcentagem = "";
+
+            if (dados.porc <= 69) {
+                classePorcentagem = "verde";
+            } else if (dados.porc <= 85) {
+                classePorcentagem = "amarelo";
+            } else if (dados.porc <= 99) {
+                classePorcentagem = "laranja";
+            } else {
+                classePorcentagem = "vermelho";
+            }
+
+            tabela.innerHTML += `
+                <tr>
+                    <td>${cat}</td>
+                    <td>R$ ${dados.valor.toFixed(2)}</td>
+                    <td>R$ ${dados.limite.toFixed(2)}</td>
+                    <td class="${classePorcentagem}">
+                        ${dados.porc}%
+                    </td>
+                </tr>`;
+        });
+}

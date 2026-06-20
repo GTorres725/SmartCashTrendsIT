@@ -20,8 +20,16 @@
         <input id="dataInicio" type="date">
         <p>até</p>
         <input id="dataFim" type="date">
-        <button onclick="renderizarTransacoes()">Filtrar</button>
-        <button onclick="limparFiltroPeriodo()">Limpar filtro</button>
+        <button 
+            onclick="
+                dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')
+                dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')
+                dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')
+                dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')
+            ">
+            Filtrar
+        </button>
+        <button onclick="limparFiltroPeriodoDash()">Limpar filtro</button>
     </section>
 
     <main>
@@ -38,21 +46,30 @@
         </section>
 
         <section id="tabeladash">
-            <h1>Saídas</h1>
-                <div>
+            <h2>Saídas</h2>
+                <div class="inptbtn">
                     <h4>Buscar por categoria</h4>
-                    <input type="text" id="dashSaidaInputCat" placeholder="digite a categoria">
-                    <button onclick="dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat'), dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat')">A</button>
-                </div>
+                    <div>
+                        <input type="text" id="dashSaidaInputCat" placeholder="digite a categoria">
+                        <button 
+                            class="fa-solid fa-arrow-right"
+                            onclick="
+                                dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat'),
+                                dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat')
+                            ">
+                        </button>
+                    </div>
 
-                <button
-                    id="ordenarDashSaidas"
-                    value="crescente"
-                    onclick="ordenarDash('ordenarDashSaidas')
-                        dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')
-                        dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')">
-                    Ordenar
-                </button>
+                    <button
+                        class="btnOrd"
+                        id="ordenarDashSaidas"
+                        value="crescente"
+                        onclick="ordenarDash('ordenarDashSaidas')
+                            dashValores('saida', 'tabelaValoresSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')
+                            dashQtd('saida', 'tabelaQtdSaida', 'dashSaidaInputCat', 'ordenarDashSaidas')">
+                        Ordenar
+                    </button>
+                </div>
 
                 <table>
                     <caption>Valores</caption>
@@ -84,22 +101,31 @@
         </section>
 
         <section id="tabeladash">
-            <h1>Entradas</h1>
+            <h2>Entradas</h2>
 
-                <div>
+                <div class="inptbtn">
                     <h4>Buscar por categoria</h4>
-                    <input type="text" id="dashEntradaInputCat" placeholder="digite a categoria">
-                    <button onclick="dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat'), dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat')">A</button>
-                </div>
+                    <div>
+                        <input type="text" id="dashEntradaInputCat" placeholder="Digite a categoria">
+                        <button
+                            class="fa-solid fa-arrow-right"
+                            onclick="
+                                dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat'),
+                                dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat')
+                            ">
+                        </button>
+                    </div>
 
-                <button
-                    id="ordenarDashEntradas"
-                    value="crescente"
-                    onclick="ordenarDash('ordenarDashEntradas')
-                        dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')
-                        dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')">
-                    Ordenar
-                </button>
+                    <button
+                        class="btnOrd"
+                        id="ordenarDashEntradas"
+                        value="crescente"
+                        onclick="ordenarDash('ordenarDashEntradas')
+                            dashValores('entrada', 'tabelaValoresEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')
+                            dashQtd('entrada', 'tabelaQtdEntrada', 'dashEntradaInputCat', 'ordenarDashEntradas')">
+                        Ordenar
+                    </button>
+                </div>
 
                 <table>
                     <caption>Valores</caption>
@@ -128,6 +154,37 @@
 
                     </tbody>
                 </table>
+        </section>
+
+        <section id="tabeladash">
+            <h2>Limites</h2>
+
+            <div class="inptbtn">
+                <h4>Buscar por mês</h4>
+                <div>
+                    <input type="month" id="periodoTabelaLimite">
+                    <button
+                        class="fa-solid fa-arrow-right"
+                        onclick="dashTblLimit()">
+                    </button>
+                </div>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Valor</th>
+                        <th>Limite</th>
+                        <th>%</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabelaLimite">
+
+                </tbody>
+            </table>
+
         </section>
     </main>
 
