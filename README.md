@@ -2,7 +2,7 @@
 
 O SmartCash é uma aplicação web desenvolvida para auxiliar no gerenciamento de finanças pessoais, permitindo o cadastro e acompanhamento de receitas, despesas e categorias de gastos de forma simples e intuitiva.
 
-## 🚀 Sobre o Projeto
+## Sobre o Projeto
 
 O objetivo do SmartCash é fornecer uma ferramenta prática para organização financeira, permitindo ao usuário visualizar sua movimentação financeira e acompanhar indicadores importantes através de dashboards e relatórios.
 
@@ -61,4 +61,4 @@ O sistema foi desenvolvido seguindo conceitos de responsividade para proporciona
 
 ## Acesse o projeto
 
-👉 [https://gtorres725.github.io/BioLinkTrendsIT-/](https://smart-cash-trends-it.vercel.app/)
+👉 https://smart-cash-trends-it.vercel.app/
