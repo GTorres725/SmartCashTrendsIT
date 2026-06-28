@@ -1,45 +1,57 @@
-# BioLink - Trends IT
+# SmartCash - Controle Financeiro Pessoal
 
-Projeto de página de links (biolink) desenvolvido com foco em design moderno, responsividade e experiência do usuário.
+O SmartCash é uma aplicação web desenvolvida para auxiliar no gerenciamento de finanças pessoais, permitindo o cadastro e acompanhamento de receitas, despesas e categorias de gastos de forma simples e intuitiva.
 
-## Sobre o projeto
+## 🚀 Sobre o Projeto
 
-O **BioLink Trends IT** é uma página estilo Linktree que centraliza links importantes em uma interface visual agradável, utilizando efeitos de **glassmorphism** e layout responsivo.
+O objetivo do SmartCash é fornecer uma ferramenta prática para organização financeira, permitindo ao usuário visualizar sua movimentação financeira e acompanhar indicadores importantes através de dashboards e relatórios.
 
-O projeto foi desenvolvido com abordagem **mobile first**, garantindo boa usabilidade em dispositivos móveis e adaptação para telas maiores.
+O projeto foi desenvolvido utilizando apenas tecnologias front-end, com persistência de dados através do Local Storage do navegador.
 
-## Objetivos
+## Funcionalidades
 
-- Criar uma página de links moderna e reutilizável
-- Praticar conceitos de **mobile first**
-- Aplicar efeitos visuais como glassmorphism
-- Melhorar organização e estruturação com HTML e CSS
-- Simular um projeto real para portfólio
+### Gerenciamento de Categorias
 
-## Tecnologias utilizadas
+- Cadastro de categorias personalizadas
+- Exclusão de categorias
+- Validação para evitar categorias duplicadas
+
+### Gerenciamento de Transações
+
+- Cadastro de receitas e despesas
+- Descrição da movimentação
+- Seleção de categoria
+- Registro de data
+- Exclusão de transações
+
+### Dashboard Financeiro
+
+- Total de receitas
+- Total de despesas
+- Saldo atual
+- Relatórios por categoria
+- Análises de gastos
+- Filtros por período
+
+### Persistência de Dados
+
+- Armazenamento local utilizando Local Storage
+- Dados mantidos mesmo após fechar o navegador
+
+## Tecnologias Utilizadas
 
 - HTML5
 - CSS3
-- Flexbox
-- Media Queries
-- Google Fonts
-
-## Design
-
-O projeto utiliza:
-
-- Efeito **glassmorphism**
-- Paleta suave com foco em conforto visual
-- Tipografia moderna
-- Sombras e transparências para profundidade
+- JavaScript (ES6+)
+- Local Storage
 
 ## Responsividade
 
-Desenvolvido seguindo o conceito **mobile first**, com adaptações para:
+O sistema foi desenvolvido seguindo conceitos de responsividade para proporcionar uma boa experiência em diferentes dispositivos:
 
-- 📱 Mobile
-- 📲 Tablet
-- 💻 Desktop
+- 📱 Smartphones
+- 📲 Tablets
+- 💻 Desktops
 
 ## Preview
 
@@ -49,4 +61,4 @@ Desenvolvido seguindo o conceito **mobile first**, com adaptações para:
 
 ## Acesse o projeto
 
-👉 https://gtorres725.github.io/BioLinkTrendsIT-/
+👉 [https://gtorres725.github.io/BioLinkTrendsIT-/](https://smart-cash-trends-it.vercel.app/)
